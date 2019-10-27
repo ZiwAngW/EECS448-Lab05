@@ -1,0 +1,37 @@
+<html>
+
+  <head>
+
+    <title></title>
+  </head>
+  <body>
+    <form action="viewuserpost.php" method="post">
+      <div>
+        <p>Select Username:</p>
+        <?php
+        $server_name="mysql.eecs.ku.edu";
+        $username="z005w155";
+        $password="haCoh9ie";
+        $dbname="z005w155";
+        $conn=new mysqli($server_name,$username,$password,$dbname);
+        if($conn->connect_errno)
+        {
+            echo"connect faill";
+            exit();
+        }
+        $resultset=$conn->query("select *from User");
+        echo "<select name='user2'>";
+        while($row=$resultset->fetch_assoc())
+        {
+          $username=$row['user_id'];
+          echo "<option  value='$username'>$username</option>";
+        }
+        echo "</select>";
+        $conn->close();
+        ?>
+      </div>
+      <br>
+        <input type="submit" value="Search">
+    </form>
+  </body>
+</html>
